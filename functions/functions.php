@@ -53,7 +53,21 @@ function createPost($titulo,$descripcion,$image,$user_id,$categoria_id){
 
   $link->close(); 
 }
-createPost($titulo,$descripcion,$image,$user_id,$categoria_id);
 //*fin-crear post*
+
+function getCategories(){
+    $link = connect();
+    $result = $link->query("SELECT * FROM categorias");
+    $arrayResponse=[];
+
+    if($result){
+        while($row=$result->fetch_assoc()) {
+            $arrayResponse[]=$row;
+        }
+    }
+
+    $link->close();
+    return $arrayResponse;
+}
 
 
