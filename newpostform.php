@@ -11,7 +11,7 @@ require_once('functions\functions.php');
     <title>Document</title>
 </head>
 <body>
-<form name="formulario" method="post" action="`functions/functions.php">
+<form name="formulario" method="post" action="dataform.php">
 
 Titulo: <input type="text" name="titulo" value="">
 Descripcion: <input type="text" name="descripcion" value="">
