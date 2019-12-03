@@ -1,7 +1,7 @@
 <?php
 //conectar a la BD:
 function connect(){ //se conecta a la base de datos
-    $conexion=new mysqli('127.0.0.1', 'root', '', 'EFI');
+    $conexion=new mysqli('127.0.0.1', 'root', 'root', 'efiphp2019');
 
     if ($conexion->connect_errno) {
         echo 'Error de conexion('.$conexion->connect_errno.'):';
