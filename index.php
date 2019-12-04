@@ -1,6 +1,5 @@
 <?php
 require_once('functions\functions.php');
-$categories=getCategories();
 ?>
 
 <!DOCTYPE html>
@@ -22,29 +21,30 @@ $categories=getCategories();
     <!-- onChange -->
     <select class="custom-select">/
       <?php foreach ($categories as $category) : ?>
-      <option value="<?php echo $category['id'] ?>"><?php echo $category['nombre'] ?></option>
+      <option value="<?php echo $category->id ?>"><?php echo $category->nombre ?></option>
       <?php endforeach; ?>
     </select>
   </div>
-  <?php for ($i=0; $i < count($publications); $i++) { 
-  $publication = $publications[$i]; ?>
+  <?php foreach ($publications as $publication): ?>
   <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-    <div class="mdl-card__title">
-      <img src="<?php echo $publication->image?>">
-      <h2 class="mdl-card__title-text"><?php echo $publication->titulo ?></h2>
-    </div>
-    <div class="mdl-card__supporting-text"><?php echo $publication->descripcion ?></div>
-    <div class="mdl-card__actions mdl-card--border">
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--4-col graybox mdl-color--red-500"><?php echo $publication->creado ?></div>
-        <div class="mdl-cell mdl-cell--4-col graybox mdl-color--blue-500">
-          <?php echo $publication->firstname." ".$publication->lastname?></div>
-        <div class="mdl-cell mdl-cell--4-col graybox mdl-color--yellow-500"><?php echo $publication->nombre?> </div>
+    <a href='post.php' style='text-decoration:none; color:inherit;'>
+      <div class="mdl-card__title">
+        <img src="<?php echo $publication->image?>">
       </div>
-    </div>
+      <h2 class="mdl-card__title-text"><?php echo $publication->titulo ?></h2>
+      <div class="mdl-card__supporting-text"><?php echo $publication->descripcion ?></div>
+      <div class="mdl-card__actions mdl-card--border">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--2-col graybox"><?php echo $publication->creado ?></div>
+          <div class="mdl-cell mdl-cell--2-col greybox"><?php echo $publication->actualizado?></div>
+          <div class="mdl-cell mdl-cell--4-col graybox">
+            <?php echo $publication->firstname." ".$publication->lastname?></div>
+          <div class="mdl-cell mdl-cell--4-col graybox"><?php echo $publication->nombre?> </div>
+        </div>
+      </div>
+    </a>
   </div>
-  <?php } ?>
-
+  <?php endforeach; ?>
 </body>
 
 </html>
