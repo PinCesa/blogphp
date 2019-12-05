@@ -1,6 +1,8 @@
 <?php
 require_once('functions\functions.php');
-$id=1;
+
+$id= $_GET['id'];
+
 $post = getOnePost($id);
 ?>
 <!DOCTYPE html>

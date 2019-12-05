@@ -31,7 +31,7 @@ function getPost(){
     $link->close(); 
     return $arrayPublications;
 }
-$publications = getPost();
+
 
 //var_dump($publications);
 
@@ -130,8 +130,38 @@ function getCategories(){
     $link->close();
     return $arrayResponse;
 }
-$categories= getCategories();
 
+function getCategoryPosts($category) { //Todas las publicaciones de una categoria especifica
+	$link = connect();
+	$result = $link->query("SELECT publicaciones.*, categorias.nombre AS categoria_nombre, users.firstname, users.lastname 
+													FROM publicaciones 
+													INNER JOIN categorias ON publicaciones.categoria_id=categorias.id 
+													INNER JOIN users ON users.id = publicaciones.user_id 
+													WHERE categoria_id = $category
+													ORDER BY publicaciones.actualizado DESC"
+												);
+	$arrayResponse=[];
+
+	if($result){
+			while($row=$result->fetch_object()) { 
+					$arrayResponse[]=$row;
+			}
+	}else {
+			printf("Errormessage: %s\n", $link->error);
+	}
+
+	$link->close(); 
+	return $arrayResponse;
+}
 
 //*inicio-mostrar post*
 
+//USUARIOS
+function checkUser($email, $password) {
+    // $password = md5($password);
+    $link = connect();
+    $result = $link->query("SELECT id FROM users WHERE email = '$email' AND password = '$password'");
+    $row = mysqli_fetch_array($result);
+    $link->close();
+    return $row['id'];
+}
